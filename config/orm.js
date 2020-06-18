@@ -1,7 +1,7 @@
 const connection = require('../config/connection');
 
 const orm = {
-  // all
+  // selectAll
   selectAll(tableInput) {
     return new Promise((resolve, reject) => {
       const queryString = 'SELECT * FROM ??;';
@@ -37,7 +37,30 @@ const orm = {
 
     });
 
+  },
+
+  // updateOne
+  updateOne(table, objColCVals, conditions) {
+    return new Promise((resolve, reject) => {
+      let queryString = 'UPDATE ' + table;
+
+      queryString += ' SET ';
+      queryString += objToSql(objColVals);
+      queryString += ' WHERE ';
+      queryString += condition;
+
+      console.log(queryString);
+      connection.query(queryString, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
   }
+};
+
+module.exports = orm;
 
 
 
@@ -51,5 +74,3 @@ const orm = {
 
 
 
-
-}
