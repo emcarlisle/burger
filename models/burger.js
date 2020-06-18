@@ -6,3 +6,6 @@ const orm = require('../config/orm');
 
 // EXPORT ORM
 module.exports = burgers_db;
+
+// refer back to cats.js 
+// fix handlebars file so it transfers over
