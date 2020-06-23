@@ -40,14 +40,14 @@ const orm = {
   },
 
   // updateOne
-  updateOne(table, objColCVals, conditions) {
+  updateOne(table, objColVals, conditions) {
     return new Promise((resolve, reject) => {
       let queryString = 'UPDATE ' + table;
 
       queryString += ' SET ';
       queryString += objToSql(objColVals);
       queryString += ' WHERE ';
-      queryString += condition;
+      queryString += conditions;
 
       console.log(queryString);
       connection.query(queryString, (err, result) => {
