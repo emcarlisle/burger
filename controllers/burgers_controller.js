@@ -14,11 +14,10 @@ router.get(async (req, res) => {
 
 
 // POST
-router.post('/api/burgers', (req, res) => {
-  burger.insertOne([req.body.name], (result) => {
-    res.json(result);
-  });
-});
+router.post(async (req, res) => {
+    const newBurger = await burger.create([req.body.burger_name]);
+    res.json({ id: newBurger.insertId });
+})
 
 
 
