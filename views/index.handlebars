@@ -1,53 +1,38 @@
 <div class="jumbotron text-center">
-  <h1>Bob's Burgers</h1>
+    <h1>Bob's Burgers</h1>
+    <i class="fas fa-hamburger fa-7x"></i>
+    <h3>Create a Burger or Eat One!</h3> 
 </div>
 
-<div id="main">
-  <div id="uneaten">
-    <h2>Eat Me!</h2>
 
-    <ul>
-      {{#each burgers}}
-      {{#unless devoured}}
-      <li>
-        {{this.burger_name}} <button data-id={{this.id}} class="uneaten btn btn-danger">Devour!</button>
-      </li>
-      {{/unless}}
-      {{/each}}
-    </ul>
-  </div>
-
-  <div id="devoured">
-    <h2>Devoured Burgers!</h2>
-    <div id="devoured">
-      <ul>
-        {{#each burgers}}
-        {{#if devoured}}
-        <li>
-          {{this.burger_name}} <button data-id={{this.id}} class="devoured btn btn-danger">Delete</button>
-        </li>
-        {{/if}}
-        {{/each}}
-      </ul>
+<div class="container">
+    <div class="row d-flex justify-content-around">
+        <div class="col-6">
+            <ul>
+                {{#each burgers}}
+                    {{#unless devoured}}
+                        {{> burgers/burger-uneaten devoured=false}}
+                    {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-6">
+            <ul class="list-group">
+                {{#each burgers}}
+                    {{#if devoured}}
+                        {{> burgers/burger-devoured devoured=true}}
+                    {{/if}}
+                {{/each}}
+            </ul>
+        </div>
     </div>
-  </div>
-
-  <div id="add-burger">
-    <h2>Add a Burger!</h2>
-    <form class="create-form">
-      <div class="form-group">
-        <label for="burger">Burger Name:</label>
-        <input type="text" id="burger" name="burger-name">
-      </div>
-      <button type="submit" class="btn btn-danger">Add Burger</button>
-    </form>
-
-  </div>
-
+    <div class="row d-flex mt-3 justify-content-center">
+        <form class="create-form">
+            <div class="form-group col text-center">
+                <textarea class="form-control row mb-3" name="add-burger" id="add-burger" cols="50" rows="3"></textarea>
+                <button class="btn btn-info row mb-3" type="submit">Submit</button>
+                <h3 class="row">What kind of burger do you want to eat?</h3>
+            </div>
+        </form>
+    </div>
 </div>
-
-    
-
-  
-    
-
