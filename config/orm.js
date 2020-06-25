@@ -1,11 +1,10 @@
-const connection = require('../config/connection');
+const db = require("../config/connection.js");
 
 const orm = {
-  // selectAll
-  selectAll(tableInput) {
+  selectAll() {
     return new Promise((resolve, reject) => {
-      const queryString = 'SELECT * FROM ??;';
-      connection.query(queryString, [tableInput], (err, result) => {
+      const query = "SELECT * FROM burgers;";
+      db.query(query, (err, result) => {
         if (err) {
           reject(err);
         }
@@ -14,63 +13,29 @@ const orm = {
     });
   },
 
-  // insertOne
-  insertOne(table, cols, vals) {
+  insertOne(burger_name) {
     return new Promise((resolve, reject) => {
-      let queryString = 'INSERT INTO ' + table;
-
-      queryString += ' (';
-      queryString += cols.toString();
-      queryString += ') ';
-      queryString += 'VALUES (';
-      queryString += printQuestionMarks(vals.length);
-      queryString += ') ';
-
-      console.table(queryString);
-
-      connection.query(queryString.vals, (err, result) => {
+      const query = "INSERT INTO burgers (burger_name) VALUES (?);";
+      db.query(query, [burger_name], (err, result) => {
         if (err) {
           reject(err);
         }
         resolve(result);
       });
-
     });
-
   },
 
-  // updateOne
-  updateOne(table, objColVals, conditions) {
+  updateOne(condition) {
     return new Promise((resolve, reject) => {
-      let queryString = 'UPDATE ' + table;
-
-      queryString += ' SET ';
-      queryString += objToSql(objColVals);
-      queryString += ' WHERE ';
-      queryString += conditions;
-
-      console.log(queryString);
-      connection.query(queryString, (err, result) => {
+      const query = `UPDATE burgers SET devoured = true WHERE ${condition}`;
+      db.query(query, [condition], (err, result) => {
         if (err) {
           reject(err);
         }
         resolve(result);
       });
     });
-  }
+  },
 };
 
 module.exports = orm;
-
-
-
-
-
-
-
-
-
-
-
-
-
