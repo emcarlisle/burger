@@ -5,24 +5,20 @@ const router = express.Router();
 // IMPORT burger
 const burger = require('../models/burger');
 
-
 // GET
-router.get(async (req, res) => {
+router.get('/', async (req, res) => {
     const burgers = await burger.all();
     res.render('index', { burgers });
 });
 
-
 // POST
-router.post(async (req, res) => {
-    const newBurger = await burger.create([req.body.burger_name]);
-    res.json({ id: newBurger.insertId });
+router.post('/api/burgers', async (req, res) => {
+    const result = await burger.create([req.body.burger_name]);
+    res.json({ id: result.insertId });
 });
 
-
-
 // PUT
-router.put(async (req, res) => {
+router.put('/api/burgers/:id', async (req, res) => {
     const condition = 'id = ' + req.params.id;
     const results = await burger.update(condition);
     if (results.changedRows === 0) {
@@ -30,6 +26,5 @@ router.put(async (req, res) => {
     }
     res.status(200).end();
 });
-
 
 module.exports = router;
