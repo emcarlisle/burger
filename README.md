@@ -1,6 +1,7 @@
-# **Burger App**
 
-  ![Github](https://img.shields.io/github/last-commit/emcarlisle/Burger App)
+  # **Burger App**
+
+  ![Github](https://img.shields.io/github/last-commit/emcarlisle/Burger)
 
   ## **Description**
  In this application, the user is able to add new burger names and be able to devour it by clicking the Devour It! button. The burger's default setting is now true once it's been devoured.
